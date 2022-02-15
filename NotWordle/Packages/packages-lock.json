@@ -178,6 +178,12 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "io.realm.unity": {
+      "version": "file:E:/UnityProjects/io.realm.unity-10.9.0.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
