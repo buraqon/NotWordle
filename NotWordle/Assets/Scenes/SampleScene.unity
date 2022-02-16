@@ -238,23 +238,7 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1678074133}
-    - target: {fileID: 1563915533, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1563915535, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1678074135}
-    - target: {fileID: 1563915535, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CallLogout
-      objectReference: {fileID: 0}
-    - target: {fileID: 1563915535, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FacebookManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1796912134, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1678074135}

@@ -170,7 +170,9 @@ public class FacebookManager : MonoBehaviour
 
         print("Logout Successful");
 
+        FB_useerDp.gameObject.SetActive(false);
         FB_useerDp.texture = null;
+        
 
         FB_userName.text = "";
 
@@ -377,6 +379,7 @@ public class FacebookManager : MonoBehaviour
             Debug.Log("Profile Pic");
 
             // FB_useerDp.texture = Sprite.Create(result.Texture, new Rect(0, 0, 128, 128), new Vector2());
+            FB_useerDp.gameObject.SetActive(true);
             FB_useerDp.texture = result.Texture;
 
         }
