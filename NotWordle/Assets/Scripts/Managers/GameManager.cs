@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     private string _id;
     
     private GridSystem _grid;
-    private string _testWord;
+    public string _testWord;
     private string _word = "";
     private Key[] _keysUsed;
     private int _currentIndex = 0;

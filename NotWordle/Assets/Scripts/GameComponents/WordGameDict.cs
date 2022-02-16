@@ -40,7 +40,7 @@ public class WordGameDict
             return false;
         }
 
-        return (words.Contains(word));
+        return (words.Contains(word.ToLower()));
     }
 
     public string GetRandomWord(int length)
@@ -52,7 +52,7 @@ public class WordGameDict
             string word = wordsArray[random];
 
             if(word.Length == length)
-                return word;
+                return word.ToUpper();
         }
         return null;
     }
