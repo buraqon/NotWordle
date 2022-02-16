@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;   
     WordGameDict wordDictionary;
-    
 
     [SerializeField] private Vector2Int _gridSize;
     [SerializeField] private Vector2 _gridPos;
@@ -212,12 +211,11 @@ public class GameManager : MonoBehaviour
         {
             case  "Name":
                 _name = field;
-                Debug.Log("Name: " + _name);
                 break;
 
             case "ID":
                 _id = field;
-                Debug.Log("ID: " + _id);
+                PlayfabManager.Instance.Login(_id);
                 break;
         } 
     }
@@ -226,5 +224,19 @@ public class GameManager : MonoBehaviour
     {
         _name = "";
         _id = "";
+    }
+
+    public string GetUserInfo(string fieldName)
+    {
+        switch (fieldName)
+        {
+            case  "Name":
+                return _name;
+
+            case "ID":
+                return _id;
+        } 
+        Debug.Log("ERROR WRONG FIELD INSERTED FOR USER INFO IN THE GAME MANAGER!!");
+        return null;
     }
 }

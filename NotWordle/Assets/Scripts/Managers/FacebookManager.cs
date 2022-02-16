@@ -301,7 +301,6 @@ public class FacebookManager : MonoBehaviour
             {
                 Debug.Log("Facebook is Login!");
                 UIManager.Instance.RefreshLogInState(FB.IsLoggedIn);
-
                 // Panel_Add.SetActive(true);
             }
 
@@ -327,9 +326,9 @@ public class FacebookManager : MonoBehaviour
 
         if (isLoggedIn)
         {
-            FB.API("/me?fields=first_name", HttpMethod.GET, DisplayUsername);
-
             FB.API("/me?fields=id", HttpMethod.GET, DisplayID);
+            
+            FB.API("/me?fields=first_name", HttpMethod.GET, DisplayUsername);
 
             FB.API("/me/picture?type=square&height=128&width=128", HttpMethod.GET, DisplayProfilePic);
         }
@@ -345,11 +344,8 @@ public class FacebookManager : MonoBehaviour
     void DisplayUsername(IResult result)
 
     {
-
         if (result.Error == null)
-
         {
-
             string name = "" + result.ResultDictionary["first_name"];
 
             FB_userName.text = name;
@@ -358,13 +354,9 @@ public class FacebookManager : MonoBehaviour
         }
 
         else
-
         {
-
             Debug.Log(result.Error);
-
         }
-
     }
 
 
