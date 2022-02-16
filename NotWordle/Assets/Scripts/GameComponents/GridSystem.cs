@@ -7,6 +7,11 @@ public class GridSystem
     private float _cellSize;
     private Cell[,] _gridArray;
 
+    public Vector2Int GridSize
+    {
+        get{ return _gridSize; }
+    }
+
     public GridSystem (Vector2Int gridSize, Vector2 gridPos, float cellSize)
     {
         _gridSize = gridSize;
