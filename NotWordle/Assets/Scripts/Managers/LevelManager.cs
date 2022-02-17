@@ -10,7 +10,7 @@ public class LevelManager
     private string _word = "";
     private Key[] _keysUsed;
     private int _currentIndex = 0;
-    private float _timer = 0;
+    
     private bool _isStarted = true;
 
     public GridSystem _grid;
@@ -30,12 +30,10 @@ public class LevelManager
         _testWord = GameManager.Instance.wordDictionary.GetRandomWord(_wordLength);
         Debug.Log(_testWord);
         _keysUsed = new Key[_testWord.Length];
-    }
 
-    public void UpdateLevel()
-    {
-        _timer += Time.deltaTime;
-        UIManager.Instance.DisplayTimer(_timer);
+        _isStarted = true;  
+        _currentIndex = 0;
+        _word = "";
     }
 
     public void AddLetter(Key key)
@@ -70,7 +68,7 @@ public class LevelManager
 
         if(tempWord == "-----")
         {
-            WinGame();
+            WinLevel();
             return;
         }
             
@@ -78,7 +76,7 @@ public class LevelManager
 
         if(_currentIndex >= _grid.GridSize.y -1)
         {
-            LoseGame();
+            LoseLevel();
             return;
         }
             
@@ -135,10 +133,6 @@ public class LevelManager
         }
 
         StartLevel();
-        _timer = 0;
-        _isStarted = true;  
-        _currentIndex = 0;
-        _word = "";
     }
 
     private void SubmittedState(int i , State state)
@@ -147,15 +141,19 @@ public class LevelManager
         _keysUsed[i].SwtichState(state);
     }
 
-    public void WinGame()
+    public void WinLevel()
     {
-        _isStarted = false;
-        UIManager.Instance.Win(_testWord);
+        UIManager.Instance.WinRound(_testWord);
+        GameManager.Instance.WinRound();
     }
 
-    public void LoseGame()
+    public void LoseLevel()
+    {
+        GameManager.Instance.LoseGame(_testWord);
+    }
+
+    public void PauseLevel()
     {
         _isStarted = false;
-        UIManager.Instance.Lose(_testWord);
     }
 }

@@ -18,8 +18,41 @@ public class GameManager : MonoBehaviour
     private string _id;
 
     const int LENGTH = 5;
+    const float RUSHTIMELIMIT = 10f;
 
     private LevelManager _levelManager;
+    private int _mode = 1;
+    private float _timer = 0;
+    private int _round = 0;
+
+    public int Mode 
+    {
+        get {return _mode; }
+        private set
+        { 
+            _mode = value ;
+        }
+    }
+
+    public float Timer 
+    {
+        get {return _timer; }
+        private set
+        { 
+            _timer = value ;
+            UIManager.Instance.DisplayTimer(_timer);
+        }
+    }
+
+    public int Round 
+    {
+        get {return _round; }
+        private set
+        { 
+            _round = value ;
+            UIManager.Instance.DisplayRounds(_round);
+        }
+    }
 
     public GameObject Keyboard
     {
@@ -54,8 +87,16 @@ public class GameManager : MonoBehaviour
     {
         if(_levelManager.IsStarted)
         {
-            _levelManager.UpdateLevel();
+            UpdateTimer();
         }  
+
+        if(Mode == 2)
+        {
+            if (Timer >= RUSHTIMELIMIT)
+            {
+                FinishTimeGame();
+            }
+        }
     }
 
     public void GetKey(Key key) 
@@ -136,5 +177,78 @@ public class GameManager : MonoBehaviour
         } 
         Debug.Log("ERROR WRONG FIELD INSERTED FOR USER INFO IN THE GAME MANAGER!!");
         return null;
+    }
+
+    public void UpdateTimer()
+    {
+        Timer += Time.deltaTime;
+    }
+
+    public void WinRound()
+    {
+        WinModeCheck();
+    }
+    
+    public void SwitchMode(int mode)
+    {
+        if(mode <= 2 && mode != _mode)
+        {
+            _mode = mode;
+            Timer = 0;
+            Round = 0;
+            LoseGame("> : (");
+        }
+        else
+            return;
+    }
+
+    void WinModeCheck()
+    {
+        switch(_mode)
+        {
+            case 0:
+                WinGame();
+                break;
+            
+            case 1:
+                Round ++;
+                if(Round >= 5)
+                {
+                    WinGame();
+                }
+                else
+                {
+                    RestartGame();
+                }
+                break;
+            
+            case 2:
+                Round ++;
+                RestartGame();
+                break;
+        }   
+    }
+
+    public void WinGame()
+    {
+        _levelManager.PauseLevel();
+        Timer = 0;
+        Round = 0;
+        UIManager.Instance.Win();
+    }
+    public void LoseGame(string word)
+    {
+        _levelManager.PauseLevel();
+        Timer = 0;
+        Round = 0;
+        UIManager.Instance.Lose(word);
+    }
+
+    public void FinishTimeGame()
+    {
+        _levelManager.PauseLevel();
+        Timer = 0;
+        Round = 0;
+        UIManager.Instance.TimeRoundOver();
     }
 }
