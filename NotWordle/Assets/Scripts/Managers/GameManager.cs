@@ -143,6 +143,8 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        Timer = 0;
+        Round = 0;
         _levelManager.RestartLevel();
     }
 
@@ -238,15 +240,11 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         _levelManager.PauseLevel();
-        Timer = 0;
-        Round = 0;
         UIManager.Instance.Win();
     }
     public void LoseGame(string word)
     {
         _levelManager.PauseLevel();
-        Timer = 0;
-        Round = 0;
         UIManager.Instance.Lose(word);
     }
 
@@ -261,6 +259,11 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {   
         _levelManager.UnPauseLevel();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
 

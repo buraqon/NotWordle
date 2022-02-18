@@ -9,26 +9,40 @@ public class WordGameDict
     private HashSet<string> words = new HashSet<string>();
     private List<string> wordsArray = new List<string>();
 
-    private TextAsset dictText;
+    private TextAsset targetText;
 
+    private TextAsset referenceText;
     public WordGameDict()
     {
-        InitializeDictionary("ospd");
+        InitTargetDic("ospd");
+        InitReferenceDic("refText");
     }
 
     public WordGameDict(string filename)
     {
-        InitializeDictionary(filename);
+        InitTargetDic(filename);
+        InitReferenceDic(filename);
     }
 
-    protected void InitializeDictionary(string filename)
+    protected void InitTargetDic(string filename)
     {
-        dictText = (TextAsset)Resources.Load(filename, typeof(TextAsset));
-        var text = dictText.text;
+        targetText = (TextAsset)Resources.Load(filename, typeof(TextAsset));
+        var text = targetText.text;
 
         foreach (string s in text.Split('\n'))
         {
             wordsArray.Add(s);
+            // words.Add(s);
+        }
+    }
+    protected void InitReferenceDic(string filename)
+    {
+        referenceText = (TextAsset)Resources.Load(filename, typeof(TextAsset));
+        var text = referenceText.text;
+
+        foreach (string s in text.Split('\n'))
+        {
+            // wordsArray.Add(s);
             words.Add(s);
         }
     }
@@ -39,8 +53,8 @@ public class WordGameDict
         {
             return false;
         }
-
-        return (words.Contains(word.ToLower()));
+        
+        return (words.Contains(word));
     }
 
     public string GetRandomWord(int length)
