@@ -350,7 +350,7 @@ public class FacebookManager : MonoBehaviour
 
             FB_userName.text = name;
 
-            GameManager.Instance.SetUserInfo("Name", name);
+            // GameManager.Instance.SetUserInfo("Name", name);
         }
 
         else

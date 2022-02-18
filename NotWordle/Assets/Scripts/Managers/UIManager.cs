@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,9 +14,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject TimerPanel;
     [SerializeField] GameObject RoundPanel;
     [SerializeField] GameObject WordPanel;
-
+    [SerializeField] GameObject SwitchModePanel;
     [SerializeField] GameObject LoginButton;
     [SerializeField] GameObject LogoutButton;
+    [SerializeField] GameObject LeaderboardButton;
+
+    [SerializeField] GameObject Keyboard;
 
     Text _timerText;
     Text _roundsText;
@@ -48,6 +52,7 @@ public class UIManager : MonoBehaviour
         LosePanel.SetActive(true);
         RestartButton.SetActive(true);
         WordPanel.SetActive(true);
+        Keyboard.SetActive(false);
 
         string text = "The word is\n" + word;
         WordPanel.GetComponentInChildren<Text>().text = text;
@@ -57,12 +62,14 @@ public class UIManager : MonoBehaviour
     {
         WinPanel.SetActive(true);
         RestartButton.SetActive(true);
+        Keyboard.SetActive(false);
     }
 
     public void TimeRoundOver()
     {
         TimeOverPanel.SetActive(true);
         RestartButton.SetActive(true);
+        Keyboard.SetActive(false);
     }
 
     public void Invalid()
@@ -90,8 +97,17 @@ public class UIManager : MonoBehaviour
 
     public void RefreshLogInState(bool state)
     {
-        LoginButton.SetActive(!state);
+        // LoginButton.SetActive(!state);
 
-        LogoutButton.SetActive(state);
+        LeaderboardButton.SetActive(state);
+
+        // LogoutButton.SetActive(state);
     }
+
+    public void ShowSwitchModePanel()
+    {
+        SwitchModePanel.SetActive(true);
+        Transform mode = SwitchModePanel.transform.Find("Mode");
+        mode.GetComponent<Text>().text = Enum.GetName(typeof(levelModes), GameManager.Instance.Mode);
+    }   
 }

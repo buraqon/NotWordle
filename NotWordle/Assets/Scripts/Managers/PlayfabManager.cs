@@ -2,11 +2,19 @@ using UnityEngine;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
+using UnityEngine.UI;
 
 public class PlayfabManager : MonoBehaviour
 {
 
     public static PlayfabManager Instance;  
+
+    [SerializeField] private GameObject rowPrefab;
+
+    [SerializeField] private Transform rowsParent;
+
+    [SerializeField] private GameObject nameWindow;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -24,18 +32,55 @@ public class PlayfabManager : MonoBehaviour
     {
         var request = new LoginWithCustomIDRequest
         {
-            // CustomId = SystemInfo.deviceUniqueIdentifier,
-            CustomId = ID,
-            CreateAccount = true
+            // CustomId = ID,
+            CustomId = SystemInfo.deviceUniqueIdentifier,
+            CreateAccount = true,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+            {
+                GetPlayerProfile = true
+            }
         };
-        PlayFabClientAPI.LoginWithCustomID(request, OnSucess, OnError);
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
     }
 
-    void OnSucess(LoginResult result)
+    void OnLoginSuccess(LoginResult result)
     {
         Debug.Log("Successful login account create");
 
-        SaveUserData(GameManager.Instance.GetUserInfo("Name"));
+        string name = null;
+        if(result.InfoResultPayload.PlayerProfile != null)
+            name = result.InfoResultPayload.PlayerProfile.DisplayName;
+
+        if(name == null)
+            nameWindow.SetActive(true);
+        else
+        {
+            GameManager.Instance.SetUserInfo("Name", name);
+            UIManager.Instance.RefreshLogInState(true);
+        }
+            
+        
+        // SaveUserData(GameManager.Instance.GetUserInfo("Name"));
+    }
+
+    public void SubmitNicknameButton()
+    {
+        var request  = new UpdateUserTitleDisplayNameRequest
+        {
+            DisplayName = nameWindow.GetComponentInChildren<InputField>().text
+        };
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+    }
+
+    void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
+    {
+        Debug.Log("Updated name");
+        
+        GameManager.Instance.SetUserInfo("Name", result.DisplayName);
+
+        UIManager.Instance.RefreshLogInState(true);
+
+        nameWindow.SetActive(false);
     }
 
     void OnError(PlayFabError error)
@@ -53,7 +98,7 @@ public class PlayfabManager : MonoBehaviour
                 new StatisticUpdate 
                 {
                     StatisticName = "DialyChallenge",
-                    Value = score
+                    Value = -score
                 }
             }
         };
@@ -63,6 +108,33 @@ public class PlayfabManager : MonoBehaviour
     void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
     {
         Debug.Log("Successfuly sent leaderboard result");
+    }
+
+    public void GetLeaderBoard()
+    {
+        var request = new GetLeaderboardRequest
+        {
+            StatisticName = "DialyChallenge",
+            StartPosition = 0,
+            MaxResultsCount = 10
+        };
+        PlayFabClientAPI.GetLeaderboard(request, OnLeaderBoardGet, OnError);
+    }
+
+    void OnLeaderBoardGet(GetLeaderboardResult result)
+    {
+        foreach(Transform item in rowsParent)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach(var item in  result.Leaderboard)
+        {
+            GameObject newGo = Instantiate(rowPrefab, rowsParent);
+            Text[] texts = newGo.GetComponentsInChildren<Text>();
+            texts[0].text = (item.Position + 1).ToString();
+            texts[1].text = item.DisplayName;
+            texts[2].text = (-item.StatValue).ToString();
+        }
     }
 
     void SaveUserData(string name)
@@ -80,7 +152,7 @@ public class PlayfabManager : MonoBehaviour
     void OnDataSend(UpdateUserDataResult result)
     {
         Debug.Log("User name saved");
-    }
+    }   
 
     public void LoadUserData()
     {

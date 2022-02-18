@@ -14,14 +14,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _keyboard;
 
     // user details
-    private string _name;
+    public string _name;
     private string _id;
 
     const int LENGTH = 5;
     const float RUSHTIMELIMIT = 10f;
 
     private LevelManager _levelManager;
-    private int _mode = 1;
+    private int _mode = 0;
     private float _timer = 0;
     private int _round = 0;
 
@@ -79,6 +79,8 @@ public class GameManager : MonoBehaviour
 
         _levelManager = new LevelManager(LENGTH, _grid);
         _levelManager.StartLevel();
+
+        PlayfabManager.Instance.Login(_id);
 
         InitiateCells();
     }
@@ -154,7 +156,6 @@ public class GameManager : MonoBehaviour
 
             case "ID":
                 _id = field;
-                PlayfabManager.Instance.Login(_id);
                 break;
         } 
     }
@@ -191,12 +192,14 @@ public class GameManager : MonoBehaviour
     
     public void SwitchMode(int mode)
     {
-        if(mode <= 2 && mode != _mode)
+        if(mode >= 0)
         {
             _mode = mode;
             Timer = 0;
             Round = 0;
-            LoseGame("> : (");
+            RestartGame();
+            _levelManager.PauseLevel();
+            UIManager.Instance.ShowSwitchModePanel();
         }
         else
             return;
@@ -214,6 +217,9 @@ public class GameManager : MonoBehaviour
                 Round ++;
                 if(Round >= 5)
                 {
+                    if(_name.Length > 0)
+                        PlayfabManager.Instance.SendLeaderboard((int)Timer);
+
                     WinGame();
                 }
                 else
@@ -251,4 +257,18 @@ public class GameManager : MonoBehaviour
         Round = 0;
         UIManager.Instance.TimeRoundOver();
     }
+
+    public void ResumeGame()
+    {   
+        _levelManager.UnPauseLevel();
+    }
+}
+
+
+
+public enum levelModes
+{
+    Classic,
+    Five_Round,
+    Rush
 }

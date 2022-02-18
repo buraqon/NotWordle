@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 public class Cell : MonoBehaviour
 {
     protected State state;
@@ -40,15 +40,25 @@ public class Cell : MonoBehaviour
                 image.color = Color.gray;
                 break;
             case State.False:
-                image.color = Color.red;
+                image.color = HexToColor("D93A3AFF");
                 break;
             case State.FalsePlaced:
-                image.color = Color.yellow;
+                image.color = HexToColor("DDBB12FF");
                 break;
             case State.Correct:
-                image.color = Color.green;
+                image.color = HexToColor("15B410FF");
                 break;
         }
+    }
+
+    public Color HexToColor(string hexNumber)
+    {
+        Color color;
+        if ( ColorUtility.TryParseHtmlString("#" + hexNumber, out color))
+        { 
+            return color;
+        }
+        return new Color();
     }
 }
 

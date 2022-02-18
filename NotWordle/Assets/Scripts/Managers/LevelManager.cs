@@ -156,4 +156,9 @@ public class LevelManager
     {
         _isStarted = false;
     }
+
+    public void UnPauseLevel()
+    {   
+        _isStarted = true;
+    }
 }
