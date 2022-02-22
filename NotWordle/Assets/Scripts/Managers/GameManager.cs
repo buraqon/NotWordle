@@ -141,11 +141,16 @@ public class GameManager : MonoBehaviour
         _levelManager.RemoveLetter();
     }
 
+    public void RestartRound()
+    {
+        _levelManager.RestartLevel();
+    }
+
     public void RestartGame()
     {
         Timer = 0;
         Round = 0;
-        _levelManager.RestartLevel();
+        RestartRound();
     }
 
     public void SetUserInfo(string fieldName, string field)
@@ -199,7 +204,7 @@ public class GameManager : MonoBehaviour
             _mode = mode;
             Timer = 0;
             Round = 0;
-            RestartGame();
+            RestartRound();
             _levelManager.PauseLevel();
             UIManager.Instance.ShowSwitchModePanel();
         }
@@ -226,13 +231,13 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    RestartGame();
+                    RestartRound();
                 }
                 break;
             
             case 2:
                 Round ++;
-                RestartGame();
+                RestartRound();
                 break;
         }   
     }
@@ -241,6 +246,7 @@ public class GameManager : MonoBehaviour
     {
         _levelManager.PauseLevel();
         UIManager.Instance.Win();
+        
     }
     public void LoseGame(string word)
     {
@@ -251,8 +257,6 @@ public class GameManager : MonoBehaviour
     public void FinishTimeGame()
     {
         _levelManager.PauseLevel();
-        Timer = 0;
-        Round = 0;
         UIManager.Instance.TimeRoundOver();
     }
 
