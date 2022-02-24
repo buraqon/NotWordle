@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     private LevelManager _levelManager;
     private int _mode = 0;
     private float _timer = 0;
+    private float _startedTime;
+    private float _nowTime;
     private int _round = 0;
 
     public int Mode 
@@ -81,6 +84,7 @@ public class GameManager : MonoBehaviour
         _levelManager.StartLevel();
 
         PlayfabManager.Instance.Login(_id);
+        _startedTime = DateTime.Now.Second + DateTime.Now.Minute * 100 + DateTime.Now.Hour * 10000;
 
         InitiateCells();
     }
@@ -134,6 +138,7 @@ public class GameManager : MonoBehaviour
     public void SubmitGuess()
     {
         _levelManager.SubmittingGuess();
+        Handheld.Vibrate();
     }
 
     public void RemoveLetter()
@@ -149,6 +154,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Timer = 0;
+        _startedTime = _nowTime;
         Round = 0;
         RestartRound();
     }
@@ -189,7 +195,8 @@ public class GameManager : MonoBehaviour
 
     public void UpdateTimer()
     {
-        Timer += Time.deltaTime;
+        _nowTime = DateTime.Now.Second + DateTime.Now.Minute * 100 + DateTime.Now.Hour * 10000; 
+        Timer = _nowTime - _startedTime;
     }
 
     public void WinRound()

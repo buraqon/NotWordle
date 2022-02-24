@@ -109,7 +109,10 @@ public class LevelManager
             if (tempWord[i] != '-')
             {
                 if (tempWord.Contains(_word[i].ToString()))
+                {
                     SubmittedState(i, State.FalsePlaced);
+                    tempWord = tempWord.Replace(_word[i] , '_');
+                }
                 else
                     SubmittedState(i, State.False);
             }
