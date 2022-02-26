@@ -2912,6 +2912,7 @@ GameObject:
   - component: {fileID: 1449570970}
   - component: {fileID: 1449570972}
   - component: {fileID: 1449570971}
+  - component: {fileID: 1449570973}
   m_Layer: 5
   m_Name: Round
   m_TagString: Untagged
@@ -2977,6 +2978,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &1449570973
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449570969}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1470352863
 GameObject:
   m_ObjectHideFlags: 0
@@ -12180,6 +12193,26 @@ PrefabInstance:
     - target: {fileID: 3628754405797575548, guid: 6cf5341bc8e1dd444921621f782c39ad, type: 3}
       propertyPath: m_Color.r
       value: 0.9254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096198051748051141, guid: 6cf5341bc8e1dd444921621f782c39ad, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 47.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096198051748051141, guid: 6cf5341bc8e1dd444921621f782c39ad, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 28.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096198051748051141, guid: 6cf5341bc8e1dd444921621f782c39ad, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.525
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096198051748051141, guid: 6cf5341bc8e1dd444921621f782c39ad, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 5153183213706525745, guid: 6cf5341bc8e1dd444921621f782c39ad, type: 3}
+      propertyPath: m_margin.z
+      value: 0.1663742
       objectReference: {fileID: 0}
     - target: {fileID: 5375121966077990772, guid: 6cf5341bc8e1dd444921621f782c39ad, type: 3}
       propertyPath: m_RootOrder

@@ -57,6 +57,7 @@ public class PlayfabManager : MonoBehaviour
         {
             GameManager.Instance.SetUserInfo("Name", name);
             UIManager.Instance.RefreshLogInState(true);
+            UIManager.Instance.SetName(name);
         }
             
         
@@ -65,11 +66,14 @@ public class PlayfabManager : MonoBehaviour
 
     public void SubmitNicknameButton()
     {
-        var request  = new UpdateUserTitleDisplayNameRequest
+        if(nameWindow.GetComponentInChildren<InputField>().text.Length <= 15)
         {
-            DisplayName = nameWindow.GetComponentInChildren<InputField>().text
-        };
-        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+            var request  = new UpdateUserTitleDisplayNameRequest
+            {
+                DisplayName = nameWindow.GetComponentInChildren<InputField>().text
+            };
+            PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+        }
     }
 
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
@@ -79,6 +83,7 @@ public class PlayfabManager : MonoBehaviour
         GameManager.Instance.SetUserInfo("Name", result.DisplayName);
 
         UIManager.Instance.RefreshLogInState(true);
+        UIManager.Instance.SetName(name);
 
         nameWindow.SetActive(false);
     }

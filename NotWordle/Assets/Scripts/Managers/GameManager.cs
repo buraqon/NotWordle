@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         _levelManager.StartLevel();
 
         PlayfabManager.Instance.Login(_id);
-        _startedTime = DateTime.Now.Second + DateTime.Now.Minute * 100 + DateTime.Now.Hour * 10000;
+        _startedTime = DateTime.Now.Second + DateTime.Now.Minute * 60 + DateTime.Now.Hour * 360 + DateTime.Now.Millisecond * 0.001f;
 
         InitiateCells();
     }
@@ -149,6 +149,7 @@ public class GameManager : MonoBehaviour
     public void RestartRound()
     {
         _levelManager.RestartLevel();
+        _startedTime = _nowTime;
     }
 
     public void RestartGame()
@@ -195,7 +196,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateTimer()
     {
-        _nowTime = DateTime.Now.Second + DateTime.Now.Minute * 100 + DateTime.Now.Hour * 10000; 
+        _nowTime = DateTime.Now.Second + DateTime.Now.Minute * 60 + DateTime.Now.Hour * 360 + DateTime.Now.Millisecond * 0.001f; 
         Timer = _nowTime - _startedTime;
     }
 
@@ -214,6 +215,7 @@ public class GameManager : MonoBehaviour
             RestartRound();
             _levelManager.PauseLevel();
             UIManager.Instance.ShowSwitchModePanel();
+            UIManager.Instance.ToggleRound(mode == 1 ? true : false);
         }
         else
             return;

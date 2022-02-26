@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance;   
+    public static UIManager Instance; 
+
+    [SerializeField] GameObject Name;  
     [SerializeField] GameObject WinPanel;
     [SerializeField] GameObject LosePanel;
     [SerializeField] GameObject TimeOverPanel;
@@ -95,6 +98,11 @@ public class UIManager : MonoBehaviour
         _roundsText.text = rounds.ToString();
     }
 
+    public void ToggleRound(bool state)
+    {
+        RoundPanel.GetComponent<CanvasGroup>().alpha = Convert.ToInt32(state);
+    }
+
     public void RefreshLogInState(bool state)
     {
         // LoginButton.SetActive(!state);
@@ -102,6 +110,11 @@ public class UIManager : MonoBehaviour
         LeaderboardButton.SetActive(state);
 
         // LogoutButton.SetActive(state);
+    }
+
+    public void SetName(string _name)
+    {
+        Name.GetComponent<TextMeshProUGUI>().text = _name;
     }
 
     public void ShowSwitchModePanel()

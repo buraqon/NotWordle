@@ -501,7 +501,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5153183214542945592, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
   m_PrefabInstance: {fileID: 961725893}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2001998815}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -673,6 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 629c46de5555fdc4d8b9d65bfa2b607b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: {fileID: 2001998815}
   WinPanel: {fileID: 1601164476}
   LosePanel: {fileID: 754112655}
   TimeOverPanel: {fileID: 51413228}
@@ -735,5 +736,10 @@ GameObject:
 --- !u!1 &1955232459 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 607186438, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
+  m_PrefabInstance: {fileID: 961725893}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2001998815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1119554358398383243, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
   m_PrefabInstance: {fileID: 961725893}
   m_PrefabAsset: {fileID: 0}
