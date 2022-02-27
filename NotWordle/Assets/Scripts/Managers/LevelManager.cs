@@ -61,6 +61,7 @@ public class LevelManager
         if (!GameManager.Instance.wordDictionary.CheckWord(_word, _testWord.Length))
         {   
             UIManager.Instance.Invalid();
+            Handheld.Vibrate();
             return;
         }
             

@@ -94,7 +94,7 @@ public class PlayfabManager : MonoBehaviour
         Debug.Log(error.GenerateErrorReport());
     }
 
-    public void SendLeaderboard(int score)
+    public void SendLeaderboardFive(int score)
     {
         var request = new UpdatePlayerStatisticsRequest
         {
@@ -104,6 +104,24 @@ public class PlayfabManager : MonoBehaviour
                 {
                     StatisticName = "DialyChallenge",
                     Value = -score
+                }
+            }
+        };
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderboardUpdate, OnError);
+    }
+
+    public void SendLeaderboardRush(int score)
+    {
+        if(score == 0)
+            return;
+        var request = new UpdatePlayerStatisticsRequest
+        {
+            Statistics = new List<StatisticUpdate>
+            {
+                new StatisticUpdate 
+                {
+                    StatisticName = "RushChallenge",
+                    Value = score
                 }
             }
         };
@@ -126,6 +144,17 @@ public class PlayfabManager : MonoBehaviour
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderBoardGet, OnError);
     }
 
+    public void GetLeaderBoardRush()
+    {
+        var request = new GetLeaderboardRequest
+        {
+            StatisticName = "RushChallenge",
+            StartPosition = 0,
+            MaxResultsCount = 10
+        };
+        PlayFabClientAPI.GetLeaderboard(request, OnLeaderBoardGetRush, OnError);
+    }
+
     void OnLeaderBoardGet(GetLeaderboardResult result)
     {
         foreach(Transform item in rowsParent)
@@ -139,6 +168,21 @@ public class PlayfabManager : MonoBehaviour
             texts[0].text = (item.Position + 1).ToString();
             texts[1].text = item.DisplayName;
             texts[2].text = (-item.StatValue).ToString();
+        }
+    }
+    void OnLeaderBoardGetRush(GetLeaderboardResult result)
+    {
+        foreach(Transform item in rowsParent)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach(var item in  result.Leaderboard)
+        {
+            GameObject newGo = Instantiate(rowPrefab, rowsParent);
+            Text[] texts = newGo.GetComponentsInChildren<Text>();
+            texts[0].text = (item.Position + 1).ToString();
+            texts[1].text = item.DisplayName;
+            texts[2].text = (item.StatValue).ToString();
         }
     }
 

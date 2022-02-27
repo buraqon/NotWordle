@@ -138,7 +138,6 @@ public class GameManager : MonoBehaviour
     public void SubmitGuess()
     {
         _levelManager.SubmittingGuess();
-        Handheld.Vibrate();
     }
 
     public void RemoveLetter()
@@ -233,7 +232,7 @@ public class GameManager : MonoBehaviour
                 if(Round >= 5)
                 {
                     if(_name.Length > 0)
-                        PlayfabManager.Instance.SendLeaderboard((int)Timer);
+                        PlayfabManager.Instance.SendLeaderboardFive((int)Timer);
 
                     WinGame();
                 }
@@ -266,6 +265,7 @@ public class GameManager : MonoBehaviour
     {
         _levelManager.PauseLevel();
         UIManager.Instance.TimeRoundOver();
+        PlayfabManager.Instance.SendLeaderboardRush(Round);
     }
 
     public void ResumeGame()
