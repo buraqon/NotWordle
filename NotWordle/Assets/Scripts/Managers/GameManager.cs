@@ -13,13 +13,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _cellInstance;
     [SerializeField] private GameObject _cellHolder;
     [SerializeField] private GameObject _keyboard;
+    [SerializeField] float rushTimeLeft;
 
     // user details
     public string _name;
     private string _id;
 
     const int LENGTH = 5;
-    const float RUSHTIMELIMIT = 10f;
 
     private LevelManager _levelManager;
     private int _mode = 0;
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
 
         if(Mode == 2)
         {
-            if (Timer >= RUSHTIMELIMIT)
+            if (Timer >= rushTimeLeft)
             {
                 FinishTimeGame();
             }
@@ -149,7 +149,6 @@ public class GameManager : MonoBehaviour
     public void RestartRound()
     {
         _levelManager.RestartLevel();
-        _startedTime = _nowTime;
     }
 
     public void RestartGame()
@@ -212,10 +211,10 @@ public class GameManager : MonoBehaviour
             _mode = mode;
             Timer = 0;
             Round = 0;
-            RestartRound();
+            RestartGame();
             _levelManager.PauseLevel();
             UIManager.Instance.ShowSwitchModePanel();
-            UIManager.Instance.ToggleRound(mode == 1 ? true : false);
+            UIManager.Instance.ToggleRound(mode != 0);
         }
         else
             return;

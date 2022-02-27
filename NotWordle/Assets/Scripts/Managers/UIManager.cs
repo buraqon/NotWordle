@@ -100,7 +100,8 @@ public class UIManager : MonoBehaviour
 
     public void ToggleRound(bool state)
     {
-        RoundPanel.GetComponent<CanvasGroup>().alpha = Convert.ToInt32(state);
+        RoundPanel.SetActive(state);
+        TimerPanel.SetActive(state);
     }
 
     public void RefreshLogInState(bool state)
@@ -122,5 +123,14 @@ public class UIManager : MonoBehaviour
         SwitchModePanel.SetActive(true);
         Transform mode = SwitchModePanel.transform.Find("Mode");
         mode.GetComponent<Text>().text = Enum.GetName(typeof(levelModes), GameManager.Instance.Mode);
-    }   
+    }
+
+    public void SelectButton(GameObject obj)
+    {
+        obj.GetComponent<Image>().color = Color.grey;
+    }
+    public void UnselectButton(GameObject obj)
+    {
+        obj.GetComponent<Image>().color = Color.white;
+    }
 }
