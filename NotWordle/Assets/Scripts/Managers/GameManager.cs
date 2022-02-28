@@ -97,10 +97,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(_levelManager.IsStarted)
-        {
-            UpdateTimer();
-        }  
+
+        UpdateTimer();
 
         if(Mode == 2)
         {
@@ -263,6 +261,11 @@ public class GameManager : MonoBehaviour
     }
     public void LoseGame(string word)
     {
+        if(_mode == 2)
+        {
+            FinishTimeGame();
+            return;
+        }
         _levelManager.PauseLevel();
         UIManager.Instance.Lose(word);
     }

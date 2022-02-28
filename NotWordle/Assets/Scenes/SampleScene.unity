@@ -560,6 +560,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1552335909, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1563915535, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -577,9 +581,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1678074136}
     - target: {fileID: 2012415184, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012415184, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012415184, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1678074133}
+    - target: {fileID: 2012415184, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 1678074133}
+    - target: {fileID: 2012415184, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012415184, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: RestartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012415184, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012415184, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 124993581451742818, guid: c90e6b1e0e535454c8c99942f92285e5, type: 3}
       propertyPath: m_Camera
       value: 
