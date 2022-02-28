@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     private float _startedTime;
     private float _nowTime;
     private int _round = 0;
+    private bool vibrateOn = true;
 
     public int Mode 
     {
@@ -35,6 +36,11 @@ public class GameManager : MonoBehaviour
         { 
             _mode = value ;
         }
+    }
+
+    public bool VibrateOn
+    {
+        get{return vibrateOn;}
     }
 
     public float Timer 
@@ -276,6 +282,11 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ToggleVibrate(bool state)
+    {
+        vibrateOn = state;
     }
 }
 
