@@ -22,14 +22,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject LogoutButton;
     [SerializeField] GameObject LeaderboardButton;
     [SerializeField] GameObject MusicOn;
-
     [SerializeField] GameObject MusicOff;
-
     [SerializeField] GameObject VibrateOn;
-
     [SerializeField] GameObject VibrateOff;
 
     [SerializeField] GameObject Keyboard;
+
+    
+    [SerializeField] AudioSource Music;
 
     Text _timerText;
     Text _roundsText;
@@ -146,6 +146,7 @@ public class UIManager : MonoBehaviour
         MusicOn.SetActive(music);
 
         MusicOff.SetActive(!music);
+        Music.mute = !music;
 
         VibrateOn.SetActive(vibration);
 

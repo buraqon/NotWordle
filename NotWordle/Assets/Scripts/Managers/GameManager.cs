@@ -296,12 +296,14 @@ public class GameManager : MonoBehaviour
     public void ToggleVibrate(bool state)
     {
         vibrateOn = state;
+        UIManager.Instance.LoadSettings(musicOn, vibrateOn);
         SavePrefs();
     }
     public void ToggleMusic(bool state)
     {
         musicOn = state;
         SavePrefs();
+        UIManager.Instance.LoadSettings(musicOn, vibrateOn);
     }
 
     public void SavePrefs()
