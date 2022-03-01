@@ -21,6 +21,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject LoginButton;
     [SerializeField] GameObject LogoutButton;
     [SerializeField] GameObject LeaderboardButton;
+    [SerializeField] GameObject MusicOn;
+
+    [SerializeField] GameObject MusicOff;
+
+    [SerializeField] GameObject VibrateOn;
+
+    [SerializeField] GameObject VibrateOff;
 
     [SerializeField] GameObject Keyboard;
 
@@ -132,5 +139,16 @@ public class UIManager : MonoBehaviour
     public void UnselectButton(GameObject obj)
     {
         obj.GetComponent<Image>().color = Color.white;
+    }
+    
+    public void LoadSettings(bool music, bool vibration)
+    {
+        MusicOn.SetActive(music);
+
+        MusicOff.SetActive(!music);
+
+        VibrateOn.SetActive(vibration);
+
+        VibrateOff.SetActive(!vibration);
     }
 }

@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private float _nowTime;
     private int _round = 0;
     private bool vibrateOn = true;
+    private bool musicOn = true;
 
     public int Mode 
     {
@@ -41,6 +42,10 @@ public class GameManager : MonoBehaviour
     public bool VibrateOn
     {
         get{return vibrateOn;}
+    }
+    public bool MusicOn
+    {
+        get{return musicOn;}
     }
 
     public float Timer 
@@ -93,6 +98,7 @@ public class GameManager : MonoBehaviour
         _startedTime = DateTime.Now.Second + DateTime.Now.Minute * 60 + DateTime.Now.Hour * 360 + DateTime.Now.Millisecond * 0.001f;
 
         InitiateCells();
+        LoadPrefs();
     }
 
     void Update()
@@ -287,6 +293,26 @@ public class GameManager : MonoBehaviour
     public void ToggleVibrate(bool state)
     {
         vibrateOn = state;
+        SavePrefs();
+    }
+    public void ToggleMusic(bool state)
+    {
+        musicOn = state;
+        SavePrefs();
+    }
+
+    public void SavePrefs()
+    {
+        PlayerPrefs.SetInt("Vibration", Convert.ToInt32(VibrateOn));
+        PlayerPrefs.SetInt("Music", Convert.ToInt32(MusicOn));
+        PlayerPrefs.Save();
+    }
+
+    public void LoadPrefs()
+    {
+        vibrateOn = System.Convert.ToBoolean(PlayerPrefs.GetInt("Vibration", 0));
+        musicOn = System.Convert.ToBoolean(PlayerPrefs.GetInt("Music", 0));
+        UIManager.Instance.LoadSettings(musicOn, vibrateOn);
     }
 }
 
