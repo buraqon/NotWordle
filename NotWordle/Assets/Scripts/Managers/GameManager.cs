@@ -103,14 +103,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
         UpdateTimer();
 
         if(Mode == 2)
         {
             if (Timer >= rushTimeLeft)
             {
-                FinishTimeGame();
+                _levelManager.LoseLevel();
             }
         }
     }
@@ -269,17 +268,17 @@ public class GameManager : MonoBehaviour
     {
         if(_mode == 2)
         {
-            FinishTimeGame();
+            FinishTimeGame(word);
             return;
         }
         _levelManager.PauseLevel();
         UIManager.Instance.Lose(word);
     }
 
-    public void FinishTimeGame()
+    public void FinishTimeGame(string word)
     {
         _levelManager.PauseLevel();
-        UIManager.Instance.TimeRoundOver();
+        UIManager.Instance.TimeRoundOver(word);
         PlayfabManager.Instance.SendLeaderboardRush(Round);
     }
 

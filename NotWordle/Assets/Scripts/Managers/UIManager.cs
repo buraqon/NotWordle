@@ -75,11 +75,15 @@ public class UIManager : MonoBehaviour
         Keyboard.SetActive(false);
     }
 
-    public void TimeRoundOver()
+    public void TimeRoundOver(string word)
     {
+        WordPanel.SetActive(true);
         TimeOverPanel.SetActive(true);
         RestartButton.SetActive(true);
         Keyboard.SetActive(false);
+
+        string text = "The word is\n" + word;
+        WordPanel.GetComponentInChildren<Text>().text = text;
     }
 
     public void Invalid()
